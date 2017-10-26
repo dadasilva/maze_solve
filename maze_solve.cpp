@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <stdio.h>
+#include <cstdlib>
 #include <iomanip>
 
 
@@ -55,90 +56,161 @@ int main(int argc, char **argv){
   Graph* g = new Graph;
 
   //create nodes for graph and adjacency vector the size of the maze
+    int index = -1;
     for(int i = 0; i < r; i++){
         for(int k = 0; k < c; k++){
-            if(k%c != 0){
-                Node* n = new Node;
-                n->visited = false;
-                n->id = k;
-                g->nodes.push_back(n);
+            //top
+            index++;
+            if(i == 0) {
+                if(k == 0){
+                    //top right corner node
+                    cout << "top right corner\n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index + 1);
+                    g->nodes[index]->adj.push_back(index + c);
+                    continue;
+                }
+                //top left corner node
+                if(k == c - 1){
+                    cout << "top left corner\n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index - 1);
+                    g->nodes[index]->adj.push_back(index + c);
+                    continue;
+                }
+                    //non corner top nodes
+                else{
+                    cout << "top\n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index - 1);
+                    g->nodes[index]->adj.push_back(index + 1);
+                    g->nodes[index]->adj.push_back(index + c);
+                    continue;
+                }
             }
-            else if(i%r != 0){
-                Node* n = new Node;
-                n->visited = false;
-                n->id = i;
-                g->nodes.push_back(n);
+            //bottom
+            if(i == r - 1){
+                if(k == 0){
+                    //bottom right corner node
+                    cout << "btm right corner\n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index+1);
+                    g->nodes[index]->adj.push_back(index-c);
+                    continue;
+                }
+                //bottom left corner node
+                if(k == c - 1){
+                    cout << "btm left corner\n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index-1);
+                    g->nodes[index]->adj.push_back(index-c);
+                    continue;
+                }
+                    //non corner bottom nodes
+                else{
+                    cout << "btm \n" << index;
+                     Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index-1);
+                    g->nodes[index]->adj.push_back(index+1);
+                    g->nodes[index]->adj.push_back(index-c);
+                    continue;
+                }
             }
-            else if(k/c != 1 or k/c != 0){
-                Node* n = new Node;
-                n->visited = false;
-                n->id = i=k;
-                g->nodes.push_back(n);
+            //right side
+            if(k == 0){
+                if(i > 0 and i < r - 1){
+                    cout << "right\n" << index;
+
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index-c);
+                    g->nodes[index]->adj.push_back(index+1);
+                    g->nodes[index]->adj.push_back(index+c);
+                    continue;
+                }
+
             }
-            else if(i/r != 1 or i/r != 0){
-                Node* n = new Node;
+            //left side
+            if(k == c-1){
+                //all non corner left nodes
+                if(i > 0 and i < r - 1){
+                    cout << "left \n" << index;
+                    Node *n = new Node;
+                    n->visited = false;
+                    n->id = index;
+                    g->nodes.push_back(n);
+                    g->nodes[index]->adj.push_back(index-c);
+                    g->nodes[index]->adj.push_back(index-1);
+                    g->nodes[index]->adj.push_back(index+c);
+                    continue;
+                }
+            }
+            else{
+                //all center
+                cout << "mid\n" << index;
+                Node *n = new Node;
                 n->visited = false;
-                n->id = i;
+                n->id = index;
                 g->nodes.push_back(n);
+                g->nodes[index]->adj.push_back(index-c);
+                g->nodes[index]->adj.push_back(index+1);
+                g->nodes[index]->adj.push_back(index-1);
+                g->nodes[index]->adj.push_back(index+c);
+                continue;
             }
         }
     }
 
-
+    g->Print();
 
     //grab wall coordinates | and print
     //place them in g initialize
-    while(cin >> token){
-        cout << token;
-        cin >> token;
-        wRow = atoi(token);
-        cout << " "<< wRow << " ";
-        cin >> token;
-        wCol = atoi(token);
-        cout << wCol << endl;
+        while (cin >> token) {
+            cout << token;
+            cin >> token;
+            wRow = atoi(token);
+            cout << " " << wRow << " ";
+            cin >> token;
+            wCol = atoi(token);
+            cout << wCol << endl;
 
-        g->nodes[wRow]->adj.push_back(wCol);
-        g->nodes[wCol]->adj.push_back(wRow);
-    }
-
+            g->nodes[wRow]->adj.push_back(wCol);
+            g->nodes[wCol]->adj.push_back(wRow);
+        }
 
   //fix each nodes of the list
   //by checking out of bounds and walls
 
 
   // - call DFS(0)
-    int index = 0;
+    int dfindex = 0;
     bool p;
     for(int i = 0; i < g->nodes.size(); i++){
-        if(!g->nodes[i]->visited){
-            //look up
-            if(index - c > 0){
-                p = g->DFS(index);
-                if(p){cout<< "PATH "<< index << endl;}
-                index++;
-            }
-            //look down
-            if(index + c < r*c){
-                p = g->DFS(index);
-                if(p){cout<< "PATH "<< index << endl;}
-                index++;
-            }
-            //look right
-            if((index - 1)/c != 0){
-                p = g->DFS(index);
-                if(p){cout<< "PATH "<< index << endl;}
-                index++;
-            }
-            //look right
-            if((index + 1)/c != 0){
-                p = g->DFS(index);
-                if(p){cout<< "PATH "<< index << endl;}
-                index++;
-            }
-
-        }
+        p = g->DFS(dfindex);
+        if(p){cout<< "PATH "<< index << endl;}
+        dfindex++;
     }
-    cout << "total" << index << endl;
+    cout << "total" << dfindex << endl;
 
 
     return 0;

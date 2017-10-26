@@ -12,9 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e846889-2583-41e3-b2f6-bdcee9e8af8b" name="Default" comment="Changed Graph Builder &#10;- started checking for edges&#10;- began DFS work (mostly borrowed Plank notes for direction;">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/maze_solve.cbp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maze_solve" afterPath="$PROJECT_DIR$/maze_solve" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/m3.txt" afterPath="$PROJECT_DIR$/m3.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maze_solve.cpp" afterPath="$PROJECT_DIR$/maze_solve.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -50,11 +50,11 @@
       <file leaf-file-name="maze_solve.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maze_solve.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-242">
-              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="185" column="39" lean-forward="true" selection-start-line="185" selection-start-column="39" selection-end-line="185" selection-end-column="39" />
               <folding>
                 <element signature="e#23#42#0" expanded="true" />
-                <element signature="e#3206#3496#0" expanded="false" />
+                <element signature="e#6484#6774#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,6 +91,15 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>\n&quot;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>\n&quot; &lt;&lt; index;</replace>
+      <replace>\n&quot; &lt;&lt; index</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -191,12 +200,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508938774133</updated>
-      <workItem from="1508938775565" duration="18585000" />
+      <workItem from="1508938775565" duration="27157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18585000" />
+    <option name="totallyTimeSpent" value="27157000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="6" y="23" width="684" height="877" extended-state="0" />
@@ -300,11 +309,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maze_solve.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-242">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state relative-caret-position="295">
+          <caret line="185" column="39" lean-forward="true" selection-start-line="185" selection-start-column="39" selection-end-line="185" selection-end-column="39" />
           <folding>
             <element signature="e#23#42#0" expanded="true" />
-            <element signature="e#3206#3496#0" expanded="false" />
+            <element signature="e#6484#6774#0" expanded="false" />
           </folding>
         </state>
       </provider>

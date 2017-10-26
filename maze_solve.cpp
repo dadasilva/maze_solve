@@ -21,7 +21,7 @@ public:
 class Graph{
 public:
     vector <Node*> nodes;
-    int DFS(int index);
+    bool DFS(int index);
     void Print();
 };
 
@@ -49,22 +49,44 @@ int main(int argc, char **argv){
         pch = strtok(NULL, " ");
         i++;
     }
-
     cout << endl;
 
     //create new instance of graph
   Graph* g = new Graph;
 
-  //create nodes and adjacency vector the size of the maze
-    Node* n = new Node;
-    for(int i = 0; i < r*c; i++){
-        n = new Node;
-        n->visited = false;
-        n->id = i;
-        g->nodes.push_back(n);
+  //create nodes for graph and adjacency vector the size of the maze
+    for(int i = 0; i < r; i++){
+        for(int k = 0; k < c; k++){
+            if(k%c != 0){
+                Node* n = new Node;
+                n->visited = false;
+                n->id = k;
+                g->nodes.push_back(n);
+            }
+            else if(i%r != 0){
+                Node* n = new Node;
+                n->visited = false;
+                n->id = i;
+                g->nodes.push_back(n);
+            }
+            else if(k/c != 1 or k/c != 0){
+                Node* n = new Node;
+                n->visited = false;
+                n->id = i=k;
+                g->nodes.push_back(n);
+            }
+            else if(i/r != 1 or i/r != 0){
+                Node* n = new Node;
+                n->visited = false;
+                n->id = i;
+                g->nodes.push_back(n);
+            }
+        }
     }
 
-    //grab walls and coordinates | and print
+
+
+    //grab wall coordinates | and print
     //place them in g initialize
     while(cin >> token){
         cout << token;
@@ -80,15 +102,45 @@ int main(int argc, char **argv){
     }
 
 
-    //g->Print();
-
-
   //fix each nodes of the list
   //by checking out of bounds and walls
 
 
-  // - call DFS(0)*/
-    g->DFS(0);
+  // - call DFS(0)
+    int index = 0;
+    bool p;
+    for(int i = 0; i < g->nodes.size(); i++){
+        if(!g->nodes[i]->visited){
+            //look up
+            if(index - c > 0){
+                p = g->DFS(index);
+                if(p){cout<< "PATH "<< index << endl;}
+                index++;
+            }
+            //look down
+            if(index + c < r*c){
+                p = g->DFS(index);
+                if(p){cout<< "PATH "<< index << endl;}
+                index++;
+            }
+            //look right
+            if((index - 1)/c != 0){
+                p = g->DFS(index);
+                if(p){cout<< "PATH "<< index << endl;}
+                index++;
+            }
+            //look right
+            if((index + 1)/c != 0){
+                p = g->DFS(index);
+                if(p){cout<< "PATH "<< index << endl;}
+                index++;
+            }
+
+        }
+    }
+    cout << "total" << index << endl;
+
+
     return 0;
 
 }
@@ -107,13 +159,18 @@ void Graph::Print(){
     }
 }
 
-int Graph::DFS(int index) {
+bool Graph::DFS(int index) {
+    Node *n;
+    int i;
     //base case 1
-    if(g->nodes->visited == true){return;}
+    n = nodes[index];
+    if(n->visited){return false;}
 
+    n->visited = true;
     //base case 2
-    if(//hit the end of the maze){
-      cout << "PATH 0 0 \n";
+    for(i = 0; i < n->adj.size(); i++){
+        DFS(n->adj[i]);
+        return true;
     }
 }
 

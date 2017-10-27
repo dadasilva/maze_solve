@@ -24,6 +24,7 @@ class Graph{
 public:
     vector <Node*> nodes;
     bool DFS(int index);
+    int end;
     void Print();
 };
 
@@ -37,8 +38,6 @@ int main(int argc, char **argv){
     int r;
     bool rr = false;
     int c;
-    int wRow = 0;
-    int wCol =0;
 
     //grab rows and columns
     int i = 0;
@@ -57,8 +56,8 @@ int main(int argc, char **argv){
   Graph* g = new Graph;
 
     // create nodes for graph and adjacency vector the size of the maze
-    // fix each nodes of the list
-    // by checking out of bounds and walls
+    // fix each nodes of the list mapping each node to thier neighbor nodes
+    // and excluding the out of bounds and walls (top, btm, right, left)
     int index = -1;
     for(int i = 0; i < r; i++){
         for(int k = 0; k < c; k++){
@@ -205,16 +204,40 @@ int main(int argc, char **argv){
         g->nodes[v2]->adj.erase(remove(v2b, v2e, v1), v2e);
     }
 
-
-
-  // - call DFS(0)
-    int dfindex = 0;
-    bool ishouldgo;
+    g->end = r*c;
+    //g->Print(); //for node debugging
+    //call DFS and Print Path
+    vector <int>::iterator it;
     for(int i = 0; i < g->nodes.size(); i++){
-        ishouldgo = g->DFS(i);
-        if(ishouldgo){cout<< "eh" << endl;}
+        g->DFS(i);
     }
+
     return 0;
+
+}
+
+bool Graph::DFS(int index) {
+    Node *n;
+    int i;
+    n = nodes[index];
+
+    //base case 1
+    if(n->visited){return false;}
+    n->visited = true;
+
+    //base case 2
+    if(index == 0) {
+        cout << "PATH " << n->id << endl;
+        return true;
+    }
+
+    for(i = 0; i < n->adj.size(); i++){
+        if(DFS(n->adj[i]) == true){
+            cout << "PATH " << n->id << endl;
+            return true;
+        }
+    }
+    return false;
 
 }
 
@@ -232,23 +255,3 @@ void Graph::Print(){
         cout << endl;
     }
 }
-
-
-bool Graph::DFS(int index) {
-    Node *n;
-    int i;
-    bool youShallNotPass = false;
-
-    //base case 1
-    n = nodes[index];
-    if(n->visited){return youShallNotPass;}
-
-    cout<< "PATH "<< n->id << endl;
-    //base case 2
-    for(i = 0; i < n->adj.size(); i++){
-        n->visited = true;
-        DFS(n->adj[i]);
-
-    }
-}
-

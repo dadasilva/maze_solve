@@ -7,6 +7,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <cstdlib>
+#include <algorithm>
 #include <iomanip>
 
 
@@ -55,7 +56,9 @@ int main(int argc, char **argv){
     //create new instance of graph
   Graph* g = new Graph;
 
-  //create nodes for graph and adjacency vector the size of the maze
+    // create nodes for graph and adjacency vector the size of the maze
+    // fix each nodes of the list
+    // by checking out of bounds and walls
     int index = -1;
     for(int i = 0; i < r; i++){
         for(int k = 0; k < c; k++){
@@ -64,7 +67,7 @@ int main(int argc, char **argv){
             if(i == 0) {
                 if(k == 0){
                     //top right corner node
-                    cout << "top right corner\n" << index;
+                    //cout << "top right corner\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -75,7 +78,7 @@ int main(int argc, char **argv){
                 }
                 //top left corner node
                 if(k == c - 1){
-                    cout << "top left corner\n" << index;
+                    //cout << "top left corner\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -86,7 +89,7 @@ int main(int argc, char **argv){
                 }
                     //non corner top nodes
                 else{
-                    cout << "top\n" << index;
+                    //cout << "top\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -101,7 +104,7 @@ int main(int argc, char **argv){
             if(i == r - 1){
                 if(k == 0){
                     //bottom right corner node
-                    cout << "btm right corner\n" << index;
+                    //cout << "btm right corner\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -112,7 +115,7 @@ int main(int argc, char **argv){
                 }
                 //bottom left corner node
                 if(k == c - 1){
-                    cout << "btm left corner\n" << index;
+                    //cout << "btm left corner\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -123,8 +126,8 @@ int main(int argc, char **argv){
                 }
                     //non corner bottom nodes
                 else{
-                    cout << "btm \n" << index;
-                     Node *n = new Node;
+                    //cout << "btm \n" << index;
+                    Node *n = new Node;
                     n->visited = false;
                     n->id = index;
                     g->nodes.push_back(n);
@@ -137,8 +140,7 @@ int main(int argc, char **argv){
             //right side
             if(k == 0){
                 if(i > 0 and i < r - 1){
-                    cout << "right\n" << index;
-
+                    //cout << "right\n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -154,7 +156,7 @@ int main(int argc, char **argv){
             if(k == c-1){
                 //all non corner left nodes
                 if(i > 0 and i < r - 1){
-                    cout << "left \n" << index;
+                    //cout << "left \n" << index;
                     Node *n = new Node;
                     n->visited = false;
                     n->id = index;
@@ -167,7 +169,7 @@ int main(int argc, char **argv){
             }
             else{
                 //all center
-                cout << "mid\n" << index;
+                //cout << "mid\n" << index;
                 Node *n = new Node;
                 n->visited = false;
                 n->id = index;
@@ -181,42 +183,42 @@ int main(int argc, char **argv){
         }
     }
 
-    g->Print();
-
-    //grab wall coordinates | and print
+    //grab wall coordinates | print | break links
     //place them in g initialize
-        while (cin >> token) {
-            cout << token;
-            cin >> token;
-            wRow = atoi(token);
-            cout << " " << wRow << " ";
-            cin >> token;
-            wCol = atoi(token);
-            cout << wCol << endl;
+    while (cin >> token) {
+        cout << token;
+        cin >> token;
+        int v1 = atoi(token);
+        cout << " " << v1 << " ";
+        cin >> token;
+        int v2 = atoi(token);
+        cout << v2 << endl;
 
-            g->nodes[wRow]->adj.push_back(wCol);
-            g->nodes[wCol]->adj.push_back(wRow);
-        }
+        //breaks the v2 link from v1
+        vector <int>::iterator v1b = g->nodes[v1]->adj.begin();
+        vector <int>::iterator v1e = g->nodes[v1]->adj.end();
+        g->nodes[v1]->adj.erase(remove(v1b, v1e, v2), v1e);
 
-  //fix each nodes of the list
-  //by checking out of bounds and walls
+        //breaks the v1 link from v2
+        vector <int>::iterator v2b = g->nodes[v2]->adj.begin();
+        vector <int>::iterator v2e = g->nodes[v2]->adj.end();
+        g->nodes[v2]->adj.erase(remove(v2b, v2e, v1), v2e);
+    }
+
 
 
   // - call DFS(0)
     int dfindex = 0;
-    bool p;
+    bool ishouldgo;
     for(int i = 0; i < g->nodes.size(); i++){
-        p = g->DFS(dfindex);
-        if(p){cout<< "PATH "<< index << endl;}
-        dfindex++;
+        ishouldgo = g->DFS(i);
+        if(ishouldgo){cout<< "eh" << endl;}
     }
-    cout << "total" << dfindex << endl;
-
-
     return 0;
 
 }
 
+//used for debugging the nodes and walls for the maze
 void Graph::Print(){
     int i , j;
     Node *n;
@@ -231,18 +233,22 @@ void Graph::Print(){
     }
 }
 
+
 bool Graph::DFS(int index) {
     Node *n;
     int i;
+    bool youShallNotPass = false;
+
     //base case 1
     n = nodes[index];
-    if(n->visited){return false;}
+    if(n->visited){return youShallNotPass;}
 
-    n->visited = true;
+    cout<< "PATH "<< n->id << endl;
     //base case 2
     for(i = 0; i < n->adj.size(); i++){
+        n->visited = true;
         DFS(n->adj[i]);
-        return true;
+
     }
 }
 

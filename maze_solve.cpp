@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <algorithm>
+#include <cstring>
 #include <iomanip>
 
 
@@ -36,7 +37,6 @@ int main(int argc, char **argv){
     cin.getline(token, 1000);
     input.open(*argv);
     int r;
-    bool rr = false;
     int c;
 
     //grab rows and columns
@@ -205,15 +205,13 @@ int main(int argc, char **argv){
     }
 
     g->end = r*c;
+    vector <Node*>::iterator it;
     //g->Print(); //for node debugging
     //call DFS and Print Path
-    vector <int>::iterator it;
-    for(int i = 0; i < g->nodes.size(); i++){
+    for(int i = g->nodes.size() - 1; i >= 0; i--){
         g->DFS(i);
     }
-
     return 0;
-
 }
 
 bool Graph::DFS(int index) {
@@ -226,19 +224,18 @@ bool Graph::DFS(int index) {
     n->visited = true;
 
     //base case 2
-    if(index == 0) {
+    if(n->id == 0) {
         cout << "PATH " << n->id << endl;
         return true;
     }
 
     for(i = 0; i < n->adj.size(); i++){
-        if(DFS(n->adj[i]) == true){
+        if(DFS(n->adj[i])) {
             cout << "PATH " << n->id << endl;
             return true;
         }
     }
     return false;
-
 }
 
 //used for debugging the nodes and walls for the maze

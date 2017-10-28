@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/daviddasilva/Documents/GitHub/maze_solve/maze_solve.cpp
+iostream
+-
+vector
+-
+fstream
+-
+stdio.h
+-
+cstdlib
+-
+algorithm
+-
+cstring
+-
+iomanip
+-
+

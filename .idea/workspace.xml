@@ -12,8 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e846889-2583-41e3-b2f6-bdcee9e8af8b" name="Default" comment="Changed Graph Builder &#10;- started checking for edges&#10;- began DFS work (mostly borrowed Plank notes for direction;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maze_solve" afterPath="$PROJECT_DIR$/maze_solve" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradescript" afterPath="$PROJECT_DIR$/gradescript" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/maze_solve.cpp" afterPath="$PROJECT_DIR$/maze_solve.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -49,11 +49,10 @@
       <file leaf-file-name="maze_solve.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/maze_solve.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="210" column="48" lean-forward="false" selection-start-line="210" selection-start-column="48" selection-end-line="210" selection-end-column="48" />
+            <state relative-caret-position="270">
+              <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
               <folding>
-                <element signature="e#23#42#0" expanded="true" />
-                <element signature="e#7274#7618#0" expanded="false" />
+                <element signature="e#391#410#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,7 +119,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="6" />
     <option name="y" value="23" />
     <option name="width" value="685" />
@@ -202,15 +201,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508938774133</updated>
-      <workItem from="1508938775565" duration="57986000" />
+      <workItem from="1508938775565" duration="60628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57986000" />
+    <option name="totallyTimeSpent" value="60628000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="23" width="685" height="877" extended-state="0" />
+    <frame x="6" y="23" width="685" height="877" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24763407" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -318,11 +317,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maze_solve.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="210" column="48" lean-forward="false" selection-start-line="210" selection-start-column="48" selection-end-line="210" selection-end-column="48" />
+        <state relative-caret-position="270">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
           <folding>
-            <element signature="e#23#42#0" expanded="true" />
-            <element signature="e#7274#7618#0" expanded="false" />
+            <element signature="e#391#410#0" expanded="true" />
           </folding>
         </state>
       </provider>

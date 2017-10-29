@@ -1,5 +1,12 @@
 /*
-/maze_solve.cpp
+/ Lab 6 - maze_solve.cpp
+/ David DaSilva
+/ This lab reads in a text file containing dimensions for a maze
+/ -it creates a fully connected graph structure from those dimensions
+/ -reads in wall nodes and breaks connections in the graph structure
+/ - it then finally calls a Depth First Search on the newly created maze
+/ checking for the end until it finds a path from 0 to r*c - 1.
+/
 */
 
 #include <iostream>
@@ -14,13 +21,14 @@
 
 using namespace std;
 
+//node class: given by Lab instructor
 class Node{
 public:
   int id;
   bool visited;
   vector <int> adj;
 };
-
+// graph class: given by Lab instructor
 class Graph{
 public:
     vector <Node*> nodes;
@@ -39,7 +47,7 @@ int main(int argc, char **argv){
     int r;
     int c;
 
-    //grab rows and columns
+    //grab rows and columns and initialize row and column
     int i = 0;
     char *pch;
     pch = strtok(token, " ");
@@ -56,7 +64,7 @@ int main(int argc, char **argv){
   Graph* g = new Graph;
 
     // create nodes for graph and adjacency vector the size of the maze
-    // fix each nodes of the list mapping each node to thier neighbor nodes
+    // fix each nodes of the list mapping each node to the neighbor nodes
     // and excluding the out of bounds and walls (top, btm, right, left)
     int index = -1;
     for(int i = 0; i < r; i++){
@@ -184,6 +192,7 @@ int main(int argc, char **argv){
 
     //grab wall coordinates | print | break links
     //place them in g initialize
+
     while (cin >> token) {
         cout << token;
         cin >> token;
@@ -193,15 +202,15 @@ int main(int argc, char **argv){
         int v2 = atoi(token);
         cout << v2 << endl;
 
-        //breaks the v2 link from v1
-        vector <int>::iterator v1b = g->nodes[v1]->adj.begin();
-        vector <int>::iterator v1e = g->nodes[v1]->adj.end();
-        g->nodes[v1]->adj.erase(remove(v1b, v1e, v2), v1e);
+            //breaks the v2 link from v1
+            vector <int>::iterator v1b = g->nodes[v1]->adj.begin();
+            vector <int>::iterator v1e = g->nodes[v1]->adj.end();
+            g->nodes[v1]->adj.erase(remove(v1b, v1e, v2), v1e);
 
-        //breaks the v1 link from v2
-        vector <int>::iterator v2b = g->nodes[v2]->adj.begin();
-        vector <int>::iterator v2e = g->nodes[v2]->adj.end();
-        g->nodes[v2]->adj.erase(remove(v2b, v2e, v1), v2e);
+            //breaks the v1 link from v2
+            vector <int>::iterator v2b = g->nodes[v2]->adj.begin();
+            vector <int>::iterator v2e = g->nodes[v2]->adj.end();
+            g->nodes[v2]->adj.erase(remove(v2b, v2e, v1), v2e);
     }
 
     g->end = r*c;
@@ -213,7 +222,13 @@ int main(int argc, char **argv){
     }
     return 0;
 }
-
+/*
+ * DFS - checks for two base cases
+ *  - if a node is visited
+ *  - if the nodes index is back at the beginning
+ *  - and recursively calls DFS on the adjacency nodes in order to negotiate
+ *  the correct path from the entrance to the exit
+ */
 bool Graph::DFS(int index) {
     Node *n;
     int i;
